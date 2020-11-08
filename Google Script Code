@@ -1,0 +1,69 @@
+function onEdit(e) {
+  
+  // Insert the ID of both the Sheet and the Form
+var ss = SpreadsheetApp.openById('xxxxxxxxxxxxxx');
+var form = FormApp.openById('xxxxxxxxxxxxxxx');
+
+  
+  // You must set to the Form to be a Quiz if it was not set up as a quiz initially, can turn this off after running once if you want
+  form.setIsQuiz(true);
+
+// For this purpose it is easiest to create the form first rather than creating the items here. Here you will just update the questions appearing in the Form/Quiz.
+// Be sure to set an answer for each item, and a point value. In this case, 5 with the correct answer of True and 5 with False .
+  
+  // First we get the items from the Form and set them as variables. 
+  // Since I have  3 items and 3 sections headers before the quiz for name and such, and these are not getting updated, we skip to 6th item in the list
+ 
+var items=form.getItems();
+
+  var quiz_item1 = items[5];  //correct answer is true   you can't update response options, but the questions are shuffled in form
+    var quiz_item2 = items[6];  //correct answer is true
+    var quiz_item3 = items[7];  //correct answer is true
+    var quiz_item4 = items[8];  //correct answer is true
+    var quiz_item5 = items[9];  //correct answer is true
+  
+    var quiz_item6 = items[10];  //correct answer is false
+    var quiz_item7 = items[11];  //correct answer is false
+    var quiz_item8 = items[12];  //correct answer is false
+    var quiz_item9 = items[13];  //correct answer is false
+    var quiz_item10 = items[14];  //correct answer is false
+  
+
+  // here we pull the questions from the Sheet. They are grouped on the sheet by those with the answer True, and those with False. 
+  // This is required since Google only lets you update the questions, not the responses. On the Form, the first 5 items are True, the next 5 are False -- they get shuffled by the Form however.
+  // So we will take 5 random from the block of True, and 5 random from the block of False. To set up the Google Sheet, check out this video -- https://www.youtube.com/watch?v=dwLMI8wP3U4
+  
+  
+      var sheet_plag = ss.getSheetByName('Random_questions');
+    var true_range = sheet_plag.getRange('B1:B5')
+      var false_range = sheet_plag.getRange('B6:B10')
+  var true_questions = true_range.getValues()
+    var false_questions = false_range.getValues()
+ 
+  // they are grouped to give us 5 true and 5 false items. They get shuffled in the form settings.
+  // here we are setting the title -- i.e., the question -- with the randomized question from the Sheet.
+  // the response options (T/F) and the correct answer will be the same for each of these, so we only change the question
+  
+   quiz_item1.setTitle(true_questions[0]); 
+   quiz_item2.setTitle(true_questions[1]); 
+   quiz_item3.setTitle(true_questions[2]); 
+   quiz_item4.setTitle(true_questions[3]); 
+   quiz_item5.setTitle(true_questions[4]); 
+  
+   quiz_item6.setTitle(false_questions[0]); 
+   quiz_item7.setTitle(false_questions[1]); 
+   quiz_item8.setTitle(false_questions[2]); 
+   quiz_item9.setTitle(false_questions[3]); 
+   quiz_item10.setTitle(false_questions[4]); 
+
+  
+  // You could do the same for multiple choice. You just have to group them based on the correct answer. 
+  // So all the questions with A would be grouped and some questions randomly selected.
+  // You can't update the options, so the options have to be in the question -- e.g., The third planet from the Sun is #A Mars, #B Earth, #C Venus
+  
+ // In the Form you can set up if you want people to see which they got right or wrong. 
+ // In the Sheet you will see their score, but since the questions change each time you won't be able to see the items that they got correct or wrong.
+    
+        
+
+        }
