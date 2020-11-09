@@ -58,11 +58,11 @@ var items=form.getItems();
 
   
   // You could do the same for multiple choice. You just have to group them based on the correct answer. 
-  // So all the questions with A would be grouped and some questions randomly selected.
+  // So all the questions with A as the correct response would be grouped and then some questions are randomly selected from the block of questions.
   // You can't update the options, so the options have to be in the question -- e.g., The third planet from the Sun is #A Mars, #B Earth, #C Venus
   
  // In the Form you can set up if you want people to see which they got right or wrong. 
- // In the Sheet you will see their score, but since the questions change each time you won't be able to see the items that they got correct or wrong.
+ // In the Sheet you will see their score, but since the questions change each time you won't be able to see the items that they got correct or wrong. But they will have a record of it.
     
         
 
